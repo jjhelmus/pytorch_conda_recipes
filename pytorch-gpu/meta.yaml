@@ -1,0 +1,58 @@
+{% set version = "0.1.12" %}
+
+package:
+  name: pytorch-gpu
+  version: {{ version }}
+
+source:
+  fn: pytorch-{{ version }}.tar.gz
+  url: https://github.com/pytorch/pytorch/archive/v{{ version }}.tar.gz
+  sha256: ace32cc277c2f59b1e496e326bf504d800061edde9b6c2af29bbb2f08728ca30
+  patches:
+    - 0001-do-not-build-depedencies.patch 
+    - 0002-use-system-nccl.patch
+
+build:
+  number: 0
+  features:
+    - nomkl  [nomkl]
+  detect_binary_files_with_prefix: False
+
+requirements:
+  build:
+    - libtorch-gpu {{ version }}
+    - cudatoolkit ==7.5
+    - cudnn ==5.1
+    - nccl
+    - python
+    - numpy
+    - setuptools
+    - pyyaml
+    - mkl              [not nomkl]
+    - openblas 0.2.19  [nomkl]
+    - cffi
+    - gcc
+    - cmake
+
+  run:
+    - libtorch-gpu {{ version }}
+    - cudatoolkit ==7.5
+    - cudnn ==5.1
+    - nccl
+    - python
+    - numpy
+    - mkl 2017.0.1     [not nomkl]
+    - openblas 0.2.19  [nomkl]
+    - cffi
+    - libgcc
+
+test:
+  imports:
+    - torch
+
+about:
+  home: http://pytorch.org/
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: PyTorch is an optimized tensor library for deep learning using GPUs and CPUs.

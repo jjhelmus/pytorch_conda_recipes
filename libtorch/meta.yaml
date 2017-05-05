@@ -1,0 +1,36 @@
+{% set version = "0.1.12" %}
+
+package:
+  name: libtorch
+  version: {{ version }}
+
+source:
+  fn: pytorch-{{ version }}.tar.gz
+  url: https://github.com/pytorch/pytorch/archive/v{{ version }}.tar.gz
+  sha256: ace32cc277c2f59b1e496e326bf504d800061edde9b6c2af29bbb2f08728ca30
+
+build:
+  number: 0
+  features:
+    - nomkl  [nomkl]
+  detect_binary_files_with_prefix: False
+
+requirements:
+  build:
+    - mkl              [not nomkl]
+    - openblas 0.2.19  [nomkl]
+    - cffi
+    - gcc
+    - cmake
+
+  run:
+    - mkl 2017.0.1     [not nomkl]
+    - openblas 0.2.19  [nomkl]
+    - libgcc
+
+about:
+  home: http://pytorch.org/
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Torch libraries for use in PyTorch.

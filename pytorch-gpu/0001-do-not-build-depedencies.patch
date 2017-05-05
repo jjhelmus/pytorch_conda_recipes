@@ -1,0 +1,28 @@
+From 637addd2cd785a7c7524d88247f235ef5b6f84eb Mon Sep 17 00:00:00 2001
+From: Jonathan Helmus <jjhelmus@gmail.com>
+Date: Thu, 27 Apr 2017 10:12:19 -0500
+Subject: [PATCH] do not build deps
+
+---
+ setup.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index ae81ab8..affb2fb 100644
+--- a/setup.py
++++ b/setup.py
+@@ -81,8 +81,9 @@ class build_deps(Command):
+             build_all_cmd += ['--with-nccl']
+         if WITH_DISTRIBUTED:
+             build_all_cmd += ['--with-distributed']
+-        if subprocess.call(build_all_cmd) != 0:
+-            sys.exit(1)
++        # do not run the build_all.sh commmand
++        #if subprocess.call(build_all_cmd) != 0:
++        #    sys.exit(1)
+         generate_nn_wrappers()
+ 
+ 
+-- 
+2.7.4
+
