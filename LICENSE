@@ -1,5 +1,8 @@
-BSD 3-Clause License
+Recipe based upon those in https://github.com/pytorch/builder
+Copyright (c) 2016, Hugh Perkins
+Copyright (c) 2016, Soumith Chintala
 
+Recipe updates
 Copyright (c) 2017, Jonathan J. Helmus
 All rights reserved.
 
